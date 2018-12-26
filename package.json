@@ -1,11 +1,15 @@
 {
-  "name": "ts-base32",
+  "name": "@ctrl/ts-base32",
   "version": "0.0.0-placeholder",
-  "description": "",
+  "description": "Base32 encoder/decoder with support for multiple variants",
   "author": "Scott Cooper <scttcper@gmail.com>",
   "license": "MIT",
-  "repository": "",
+  "repository": "TypeCtrl/ts-base32",
   "keywords": [
+    "base32",
+    "rfc3548",
+    "rfc4648",
+    "crockford",
     "typescript"
   ],
   "source": "src/index.ts",

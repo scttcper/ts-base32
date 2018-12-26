@@ -7,7 +7,6 @@
     "module": "es2015",
     "esModuleInterop": true,
     "strict": true,
-    "noImplicitAny": false,
     "noUnusedLocals": true,
     "sourceMap": true,
     "outDir": "dist"

@@ -12,8 +12,8 @@ export function base32Encode(
   variant: Variant = 'RFC4648',
   options: Partial<Base32EncodeOptions> = {},
 ) {
-  let alphabet;
-  let defaultPadding;
+  let alphabet: string;
+  let defaultPadding: boolean;
 
   switch (variant) {
     case 'RFC3548':
@@ -64,7 +64,7 @@ export function base32Encode(
   return output;
 }
 
-function readChar(alphabet, char) {
+function readChar(alphabet: string, char: string): number {
   const idx = alphabet.indexOf(char);
 
   if (idx === -1) {
@@ -75,7 +75,7 @@ function readChar(alphabet, char) {
 }
 
 export function base32Decode(input: string, variant: Variant = 'RFC4648'): ArrayBuffer {
-  let alphabet;
+  let alphabet: string;
   let cleanedInput: string;
 
   switch (variant) {
