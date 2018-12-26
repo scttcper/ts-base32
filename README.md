@@ -1,6 +1,6 @@
 # ts-base32
 
-Base 32 encode and decode and a helper hex to ArrayBuffer in typescript exported as both commonjs and tree shakeable modules. Support for RFC4648, RFC4648_HEX, and CROCKFORD base32 encoding. Mostly directly taken from LinusU's packages.
+Base32 encode and decode in typescript exported as both commonjs and tree shakeable modules. Support for RFC4648, RFC4648_HEX, and CROCKFORD base32 encoding. Mostly directly taken from LinusU's packages.
 
 ### Install
 ```sh
@@ -9,7 +9,19 @@ npm install @ctrl/ts-base32
 
 ### Use
 ```ts
-import { base32Encode }
+import { base32Encode, base32Decode } from '@ctrl/ts-base32';
+
+console.log(base32Encode(Buffer.from('a')));
+// 'ME======'
+
+console.log(base32Encode(Buffer.from('a'), { padding: false }));
+// 'ME'
+
+console.log(base32Decode('ME======'));
+// ArrayBuffer { byteLength: 1 }
+
+console.log(Buffer.from(base32Decode('ME======')).toString());
+// 'a'
 ```
 
 ### See Also
