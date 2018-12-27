@@ -31,6 +31,9 @@ describe('base32', () => {
         'ONUG6Y3LNFXGO3DZEBSGS43NNFZXGZLE',
       );
     });
+    it('should error on unsupported variant', () => {
+      expect(() => base32Encode(Buffer.from('a'), 'fail' as any)).toThrow();
+    });
   });
 
   describe('decode', () => {
@@ -69,6 +72,9 @@ describe('base32', () => {
       const encoded = '6YPB7GMNNEKR32BTJW7HKOVRPLUDDQJYJGTK5TMV2CSOLXBF';
       expect(base32Encode(Buffer.from(code, 'hex')).toString()).toBe(encoded);
       expect(Buffer.from(base32Decode(encoded)).toString('hex')).toBe(code);
+    });
+    it('should error on unsupported variant', () => {
+      expect(() => base32Decode('ME======', 'fail' as any)).toThrow();
     });
   });
 
