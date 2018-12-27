@@ -125,5 +125,8 @@ describe('base32', () => {
         ]).buffer,
       );
     });
+    it('should error on uneven length', () => {
+      expect(() => hexToArrayBuffer('123')).toThrow();
+    });
   });
 });
