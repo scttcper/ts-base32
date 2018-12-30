@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "repository": "TypeCtrl/ts-base32",
+  "homepage": "https://typectrl.github.io/ts-base32/",
   "keywords": [
     "base32",
     "rfc3548",
