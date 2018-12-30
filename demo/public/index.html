@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>@ctrl/ts-base32</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
+    <link
+      rel="stylesheet"
+      href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css"
+    />
+    <style>
+      body {
+        background-color: #fcfffd;
+      }
+
+      h1 {
+        padding-top: 1em;
+        color: #444;
+        margin-bottom: 1rem;
+      }
+
+      h4 {
+        color: #444;
+      }
+
+      .lead {
+        font-size: 2rem;
+        font-weight: 300;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+
+      @media (min-width: 768px) {
+        .container {
+          width: 750px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Base32</h1>
+          <p class="lead">Base32 encoder/decoder with support for multiple variants</p>
+
+          <h4>About</h4>
+          <p>
+            <a href="https://en.wikipedia.org/wiki/Base32">Base32</a> encode and decode in
+            typescript exported as both commonjs and tree shakeable modules. Support for RFC4648,
+            RFC4648_HEX, and CROCKFORD base32 encoding. Mostly directly taken from LinusU's
+            packages.
+          </p>
+
+          <h4>Install</h4>
+          <p>npm install @ctrl/ts-base32</p>
+
+          <h4>Usage</h4>
+          <p><a href="https://github.com/TypeCtrl/ts-base32#readme">Readme</a></p>
+
+          <h4>Demo</h4>
+          <label for="color">Input string:</label>
+          <textarea type="text" style="width: 100%" placeholder="input" id="input"></textarea>
+          <label for="color">Output base32 encoded:</label>
+          <textarea type="text" style="width: 100%" placeholder="output" id="output"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <script src="bundle.js"></script>
+  </body>
+</html>

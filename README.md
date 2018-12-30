@@ -25,6 +25,6 @@ console.log(Buffer.from(base32Decode('ME======')).toString());
 ```
 
 ### See Also
-base32-encode - https://github.com/LinusU/base32-encode
-base32-decode - https://github.com/LinusU/base32-decode
-hex-to-array-buffer - https://github.com/LinusU/hex-to-array-buffer
+base32-encode - https://github.com/LinusU/base32-encode  
+base32-decode - https://github.com/LinusU/base32-decode  
+hex-to-array-buffer - https://github.com/LinusU/hex-to-array-buffer  

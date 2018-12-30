@@ -33,4 +33,6 @@ jspm_packages
 build
 docs
 dist
-.rpt2
+.rpt2_cache
+demo/**/*.js
+demo/**/*.js.map

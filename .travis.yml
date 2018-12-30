@@ -22,6 +22,17 @@ jobs:
       script:
         - npm run build
         - npm run semantic-release
+    - stage: deploy
+      node_js: lts/*
+      script:
+        - npm run build:demo
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: demo/public
+        github_token: $GH_TOKEN
+        on:
+          branch: master
 
 notifications:
   email: false
