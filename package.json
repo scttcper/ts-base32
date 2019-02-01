@@ -39,7 +39,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "23.3.13",
-    "@types/node": "10.12.18",
+    "@types/node": "10.12.19",
     "buffer": "5.2.1",
     "jest": "23.6.0",
     "microbundle": "0.9.0",
