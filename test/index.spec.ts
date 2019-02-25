@@ -15,7 +15,8 @@ describe('base32', () => {
       (variant: Variant, input: string, expected: string) => {
         const options = { padding: false };
         expect(base32Encode(hexToArrayBuffer(input), variant, options)).toEqual(
-          expected.replace(/=/g, ''),
+          // eslint-disable-next-line no-useless-escape
+          expected.replace(/\=/g, ''),
         );
       },
     );
