@@ -1,4 +1,4 @@
-# ts-base32 [![npm](https://img.shields.io/npm/v/@ctrl/ts-base32.svg?maxAge=3600)](https://www.npmjs.com/package/@ctrl/ts-base32) [![build status](https://travis-ci.com/TypeCtrl/ts-base32.svg?branch=master)](https://travis-ci.org/typectrl/ts-base32) [![coverage status](https://codecov.io/gh/typectrl/ts-base32/branch/master/graph/badge.svg)](https://codecov.io/gh/typectrl/ts-base32)
+# ts-base32 [![npm](https://img.shields.io/npm/v/@ctrl/ts-base32.svg?maxAge=3600)](https://www.npmjs.com/package/@ctrl/ts-base32) [![CircleCI](https://circleci.com/gh/TypeCtrl/ts-base32.svg?style=svg)](https://circleci.com/gh/TypeCtrl/ts-base32) [![coverage status](https://codecov.io/gh/typectrl/ts-base32/branch/master/graph/badge.svg)](https://codecov.io/gh/typectrl/ts-base32)
 
 Base32 encode and decode in typescript exported as both commonjs and tree shakeable modules. Support for RFC4648, RFC4648_HEX, and CROCKFORD base32 encoding. Mostly directly taken from LinusU's packages.
 
