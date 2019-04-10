@@ -5,14 +5,14 @@ describe('base32', () => {
   describe('encode', () => {
     it.each(TEST_CASES)(
       'should encode (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         expect(base32Encode(hexToArrayBuffer(input), variant)).toEqual(expected);
       },
     );
 
     it.each(TEST_CASES)(
       'should encode w/ padding disabled (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         const options = { padding: false };
         expect(base32Encode(hexToArrayBuffer(input), variant, options)).toEqual(
           // eslint-disable-next-line no-useless-escape
@@ -42,13 +42,13 @@ describe('base32', () => {
   describe('decode', () => {
     it.each(TEST_CASES)(
       'should decode (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
     it.each(CROCKFORD_EXTRAS)(
       'should decode crockford extra (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
