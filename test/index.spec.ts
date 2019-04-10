@@ -1,4 +1,4 @@
-import { base32Encode, base32Decode, Variant, hexToArrayBuffer } from '../src/index';
+import { base32Encode, base32Decode, hexToArrayBuffer } from '../src/index';
 import { TEST_CASES, CROCKFORD_EXTRAS } from './test-cases';
 
 describe('base32', () => {
