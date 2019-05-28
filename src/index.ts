@@ -11,7 +11,7 @@ export function base32Encode(
   buffer: ArrayBuffer,
   variant: Variant = 'RFC4648',
   options: Partial<Base32EncodeOptions> = {},
-) {
+): string {
   let alphabet: string;
   let defaultPadding: boolean;
 
