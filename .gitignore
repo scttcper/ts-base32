@@ -36,3 +36,4 @@ dist
 .rpt2_cache
 demo/**/*.js
 demo/**/*.js.map
+yarn.lock
