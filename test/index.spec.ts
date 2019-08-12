@@ -43,13 +43,13 @@ describe('base32', () => {
   describe('decode', () => {
     it.each(TEST_CASES)(
       'should decode (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
     it.each(CROCKFORD_EXTRAS)(
       'should decode crockford extra (%s, %s)',
-      (variant: Variant, input: string, expected: string) => {
+      (variant: any, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
