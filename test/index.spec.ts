@@ -1,18 +1,18 @@
-import { base32Encode, base32Decode, hexToArrayBuffer } from '../src/index';
+import { base32Encode, base32Decode, hexToArrayBuffer, Variant } from '../src/index';
 import { TEST_CASES, CROCKFORD_EXTRAS } from './test-cases';
 
 describe('base32', () => {
   describe('encode', () => {
     it.each(TEST_CASES)(
       'should encode (%s, %s)',
-      (variant: any, input: string, expected: string) => {
+      (variant: Variant, input: string, expected: string) => {
         expect(base32Encode(hexToArrayBuffer(input), variant)).toEqual(expected);
       },
     );
 
     it.each(TEST_CASES)(
       'should encode w/ padding disabled (%s, %s)',
-      (variant: any, input: string, expected: string) => {
+      (variant: Variant, input: string, expected: string) => {
         const options = { padding: false };
         expect(base32Encode(hexToArrayBuffer(input), variant, options)).toEqual(
           // eslint-disable-next-line no-useless-escape
@@ -33,6 +33,7 @@ describe('base32', () => {
       );
     });
     it('should error on unsupported variant', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => base32Encode(Buffer.from('a'), 'fail' as any)).toThrow(
         'Unknown base32 variant: fail',
       );
@@ -42,13 +43,13 @@ describe('base32', () => {
   describe('decode', () => {
     it.each(TEST_CASES)(
       'should decode (%s, %s)',
-      (variant: any, input: string, expected: string) => {
+      (variant: Variant, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
     it.each(CROCKFORD_EXTRAS)(
       'should decode crockford extra (%s, %s)',
-      (variant: any, input: string, expected: string) => {
+      (variant: Variant, input: string, expected: string) => {
         expect(base32Decode(expected, variant)).toEqual(hexToArrayBuffer(input));
       },
     );
@@ -77,6 +78,7 @@ describe('base32', () => {
       expect(Buffer.from(base32Decode(encoded)).toString('hex')).toBe(code);
     });
     it('should error on unsupported variant', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => base32Decode('ME======', 'fail' as any)).toThrow('Unknown base32 variant: fail');
     });
     it('should error from invalid encoding characters', () => {
