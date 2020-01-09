@@ -30,7 +30,7 @@ export function base32Encode(
       defaultPadding = false;
       break;
     default:
-      throw new Error(`Unknown base32 variant: ${variant}`);
+      throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
 
   const padding = options.padding === undefined ? defaultPadding : options.padding;
@@ -98,7 +98,7 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Array
         .replace(/[IL]/g, '1');
       break;
     default:
-      throw new Error(`Unknown base32 variant: ${variant}`);
+      throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
 
   const { length } = cleanedInput;

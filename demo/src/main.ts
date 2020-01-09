@@ -11,10 +11,10 @@ const output = document.querySelector<HTMLInputElement>('#output');
 input.addEventListener('input', event => inputChange((event.target as HTMLInputElement).value));
 output.addEventListener('input', event => outputChange((event.target as HTMLInputElement).value));
 
-function inputChange(str: string) {
+function inputChange(str: string): void {
   output.value = base32Encode(Buffer.from(str));
 }
 
-function outputChange(str: string) {
+function outputChange(str: string): void {
   input.value = Buffer.from(base32Decode(str)).toString();
 }
