@@ -33,7 +33,6 @@ describe('base32', () => {
       );
     });
     it('should error on unsupported variant', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => base32Encode(Buffer.from('a'), 'fail' as any)).toThrow(
         'Unknown base32 variant: fail',
       );
@@ -78,7 +77,6 @@ describe('base32', () => {
       expect(Buffer.from(base32Decode(encoded)).toString('hex')).toBe(code);
     });
     it('should error on unsupported variant', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => base32Decode('ME======', 'fail' as any)).toThrow('Unknown base32 variant: fail');
     });
     it('should error from invalid encoding characters', () => {
