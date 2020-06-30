@@ -2,7 +2,7 @@
 
 Base32 encode and decode in typescript exported as both commonjs and tree shakeable modules. Support for RFC4648, RFC4648_HEX, and CROCKFORD base32 encoding. Mostly directly taken from LinusU's packages.
 
-Demo: https://ts-base32.netlify.com/  
+Demo: https://ts-base32.vercel.app
 
 ### Install
 ```console
