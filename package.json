@@ -32,8 +32,7 @@
     "build": "del dist && tsc -p tsconfig.build.json && tsc -p tsconfig.module.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --coverage --no-cache",
-    "semantic-release": "semantic-release"
+    "test:ci": "jest --coverage --no-cache"
   },
   "dependencies": {},
   "devDependencies": {
