@@ -37,7 +37,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@ctrl/eslint-config": "1.0.0",
+    "@ctrl/eslint-config": "1.0.2",
     "@jest/globals": "26.1.0",
     "@types/node": "14.0.14",
     "buffer": "5.6.0",
