@@ -1,4 +1,4 @@
-export const TEST_CASES = [
+export const TEST_CASES: Array<[string, string, string]> = [
   // RFC 4648 - Test vectors
   ['RFC4648', '', ''],
   ['RFC4648', '66', 'MY======'],
@@ -105,7 +105,7 @@ export const TEST_CASES = [
   ['Crockford', '666f6f626172', 'CSQPYRK1E8'],
 ];
 
-export const CROCKFORD_EXTRAS = [
+export const CROCKFORD_EXTRAS: Array<[string, string, string]> = [
   ['Crockford', '', ''],
   ['Crockford', '61', 'C4'],
   ['Crockford', '61', 'c4'],
