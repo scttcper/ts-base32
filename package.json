@@ -36,7 +36,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/preset-env": "7.11.0",
+    "@babel/plugin-transform-modules-commonjs": "7.10.4",
     "@babel/preset-typescript": "7.10.4",
     "@ctrl/eslint-config": "1.0.6",
     "@jest/globals": "26.4.0",
