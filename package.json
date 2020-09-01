@@ -38,20 +38,20 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "7.10.4",
     "@babel/preset-typescript": "7.10.4",
-    "@ctrl/eslint-config": "1.0.6",
-    "@jest/globals": "26.4.0",
-    "@types/node": "14.0.27",
+    "@ctrl/eslint-config": "1.1.0",
+    "@types/jest": "26.0.12",
+    "@types/node": "14.6.2",
     "buffer": "5.6.0",
     "del-cli": "3.0.1",
-    "jest": "26.4.0",
-    "rollup": "2.25.0",
-    "rollup-plugin-livereload": "1.3.0",
+    "jest": "26.4.2",
+    "rollup": "2.26.8",
+    "rollup-plugin-livereload": "2.0.0",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-serve": "1.0.3",
-    "rollup-plugin-terser": "7.0.0",
+    "rollup-plugin-serve": "1.0.4",
+    "rollup-plugin-terser": "7.0.1",
     "rollup-plugin-typescript2": "0.27.2",
-    "typescript": "3.9.7"
+    "typescript": "4.0.2"
   },
   "jest": {
     "testEnvironment": "node"

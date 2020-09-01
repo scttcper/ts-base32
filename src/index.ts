@@ -1,16 +1,13 @@
-const RFC4648 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567' as const;
-const RFC4648_HEX = '0123456789ABCDEFGHIJKLMNOPQRSTUV' as const;
-const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ' as const;
+const RFC4648 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+const RFC4648_HEX = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
+const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
-export type Variant = 'RFC3548' | 'RFC4648' | 'RFC4648-HEX' | 'Crockford';
-export interface Base32EncodeOptions {
-  padding: boolean;
-}
+type Variant = 'RFC3548' | 'RFC4648' | 'RFC4648-HEX' | 'Crockford';
 
 export function base32Encode(
   buffer: ArrayBuffer,
   variant: Variant = 'RFC4648',
-  options: Partial<Base32EncodeOptions> = {},
+  options: Partial<{ padding: boolean }> = {},
 ): string {
   let alphabet: string;
   let defaultPadding: boolean;
