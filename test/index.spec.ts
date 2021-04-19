@@ -1,3 +1,5 @@
+import { describe, it, expect } from '@jest/globals';
+
 import { base32Encode, base32Decode, hexToArrayBuffer } from '../src/index';
 import { TEST_CASES, CROCKFORD_EXTRAS } from './test-cases';
 
