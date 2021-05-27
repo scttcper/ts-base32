@@ -1,6 +1,7 @@
-version: '2.1'
+version: 2.1
 orbs:
   node: circleci/node@4
+  codecov: codecov/codecov@1
 jobs:
   test:
     executor:
@@ -15,9 +16,7 @@ jobs:
       - run:
           name: lint
           command: npm run lint
-      - run:
-          name: codecov
-          command: bash <(curl -s https://codecov.io/bash)
+      - codecov/upload
   release:
     docker:
       - image: cimg/node:current
