@@ -13,9 +13,9 @@
     "crockford",
     "typescript"
   ],
-  "main": "dist/index.js",
-  "module": "dist/module/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -26,7 +26,7 @@
     "lint": "eslint --ext .js,.ts, .",
     "lint:fix": "eslint --fix --ext .js,.ts, .",
     "prepare": "npm run build",
-    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.module.json",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --coverage"
@@ -37,6 +37,7 @@
     "@babel/preset-typescript": "7.13.0",
     "@ctrl/eslint-config": "2.0.6",
     "@jest/globals": "27.0.1",
+    "@sindresorhus/tsconfig": "1.0.2",
     "@types/node": "15.6.1",
     "buffer": "6.0.3",
     "jest": "27.0.1",
