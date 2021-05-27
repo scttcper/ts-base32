@@ -29,7 +29,7 @@
     "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.module.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --coverage --no-cache"
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --coverage"
   },
   "dependencies": {},
   "devDependencies": {
@@ -40,6 +40,7 @@
     "@types/node": "15.6.1",
     "buffer": "6.0.3",
     "jest": "27.0.1",
+    "jest-junit": "12.0.0",
     "rollup": "2.50.1",
     "rollup-plugin-livereload": "2.0.0",
     "rollup-plugin-node-builtins": "2.1.2",
