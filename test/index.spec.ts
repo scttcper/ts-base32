@@ -1,7 +1,8 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 
-import { base32Encode, base32Decode, hexToArrayBuffer } from '../src/index';
-import { TEST_CASES, CROCKFORD_EXTRAS } from './test-cases';
+import { base32Decode, base32Encode, hexToArrayBuffer } from '../src/index';
+
+import { CROCKFORD_EXTRAS, TEST_CASES } from './test-cases';
 
 describe('base32', () => {
   describe('encode', () => {
@@ -94,41 +95,13 @@ describe('base32', () => {
       expect(hexToArrayBuffer('AABB')).toEqual(Uint8Array.from([0xaa, 0xbb]).buffer);
       expect(hexToArrayBuffer('ceae96a325e1dc5dd4f405d905049ceb')).toEqual(
         Uint8Array.from([
-          0xce,
-          0xae,
-          0x96,
-          0xa3,
-          0x25,
-          0xe1,
-          0xdc,
-          0x5d,
-          0xd4,
-          0xf4,
-          0x05,
-          0xd9,
-          0x05,
-          0x04,
-          0x9c,
+          0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
           0xeb,
         ]).buffer,
       );
       expect(hexToArrayBuffer('CEAE96A325E1DC5DD4F405D905049CEB')).toEqual(
         Uint8Array.from([
-          0xce,
-          0xae,
-          0x96,
-          0xa3,
-          0x25,
-          0xe1,
-          0xdc,
-          0x5d,
-          0xd4,
-          0xf4,
-          0x05,
-          0xd9,
-          0x05,
-          0x04,
-          0x9c,
+          0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
           0xeb,
         ]).buffer,
       );
