@@ -1,6 +1,3 @@
 {
-  "extends": "@sindresorhus/tsconfig",
-  "compilerOptions": {
-    "outDir": "dist",
-  }
+  "extends": "@sindresorhus/tsconfig"
 }
