@@ -13,20 +13,20 @@
     "crockford",
     "typescript"
   ],
-  "main": "dist/index.js",
-  "module": "dist/module/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "sideEffects": false,
   "scripts": {
-    "build:demo": "rollup -c rollup.demo.js",
-    "watch:demo": "rollup -c rollup.demo.js -w",
+    "demo:build": "rollup -c rollup.demo.js",
+    "demo:watch": "rollup -c rollup.demo.js -w",
     "lint": "eslint --ext .js,.ts, .",
     "lint:fix": "eslint --fix --ext .js,.ts, .",
     "prepare": "npm run build",
-    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.module.json",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --coverage"
@@ -37,11 +37,12 @@
     "@babel/preset-typescript": "7.13.0",
     "@ctrl/eslint-config": "2.0.6",
     "@jest/globals": "27.0.1",
+    "@sindresorhus/tsconfig": "1.0.2",
     "@types/node": "15.6.1",
     "buffer": "6.0.3",
     "jest": "27.0.1",
     "jest-junit": "12.1.0",
-    "rollup": "2.50.1",
+    "rollup": "2.50.3",
     "rollup-plugin-livereload": "2.0.0",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
@@ -68,6 +69,6 @@
     "branch": "master"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   }
 }

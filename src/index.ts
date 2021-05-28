@@ -39,7 +39,7 @@ export function base32Encode(
   let output = '';
 
   for (let i = 0; i < length; i++) {
-    value = (value << 8) | view[i];
+    value = (value << 8) | view[i]!;
     bits += 8;
 
     while (bits >= 5) {
@@ -104,7 +104,7 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Array
   const output = new Uint8Array(((length * 5) / 8) | 0);
 
   for (let i = 0; i < length; i++) {
-    value = (value << 5) | readChar(alphabet, cleanedInput[i]);
+    value = (value << 5) | readChar(alphabet, cleanedInput[i]!);
     bits += 5;
 
     if (bits >= 8) {
