@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 
-import { base32Decode, base32Encode, hexToArrayBuffer } from '../../src';
+import { base32Decode, base32Encode, hexToArrayBuffer } from '../..';
 
 (window as any).base32Decode = base32Decode;
 (window as any).base32Encode = base32Encode;
