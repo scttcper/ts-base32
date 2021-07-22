@@ -37,6 +37,8 @@ workflows:
     jobs:
       - test
       - release:
+          context:
+            - npm
           filters:
             branches:
               only:
