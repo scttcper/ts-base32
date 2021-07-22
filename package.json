@@ -33,22 +33,22 @@
     "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit --coverage"
   },
   "devDependencies": {
-    "@ctrl/eslint-config": "2.0.6",
-    "@jest/globals": "27.0.1",
+    "@ctrl/eslint-config": "2.0.9",
+    "@jest/globals": "27.0.6",
     "@sindresorhus/tsconfig": "1.0.2",
-    "@types/node": "15.6.1",
+    "@types/node": "16.4.0",
     "buffer": "6.0.3",
-    "jest": "27.0.1",
-    "jest-junit": "12.1.0",
-    "rollup": "2.50.3",
-    "rollup-plugin-livereload": "2.0.0",
+    "jest": "27.0.6",
+    "jest-junit": "12.2.0",
+    "rollup": "2.53.3",
+    "rollup-plugin-livereload": "2.0.5",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-serve": "1.1.0",
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.30.0",
-    "ts-jest": "27.0.1",
-    "typescript": "4.3.2"
+    "ts-jest": "27.0.4",
+    "typescript": "4.3.5"
   },
   "jest": {
     "testEnvironment": "node",
