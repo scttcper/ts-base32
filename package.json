@@ -27,8 +27,8 @@
     "prepare": "npm run build",
     "build": "tsc",
     "test": "jest",
-    "test:watch": "npm run test -- --watch",
-    "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit --coverage"
+    "test:watch": "jest --watch",
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --coverage"
   },
   "devDependencies": {
     "@ctrl/eslint-config": "2.0.9",
@@ -50,6 +50,8 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "collectCoverageFrom": ["src/**/**.ts"],
+    "testMatch": ["**/test/**/**.spec.ts"],
     "coverageProvider": "v8",
     "preset": "ts-jest/presets/default-esm",
     "globals": {
