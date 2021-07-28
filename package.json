@@ -14,11 +14,9 @@
     "typescript"
   ],
   "type": "module",
-  "exports": "./index.js",
-  "types": "./index.d.ts",
+  "exports": "./dist/src/index.js",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist/src"
   ],
   "sideEffects": false,
   "scripts": {
@@ -27,8 +25,8 @@
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --fix --ext .ts .",
     "prepare": "npm run build",
-    "build": "tsc -p tsconfig.build.json",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "build": "tsc",
+    "test": "jest",
     "test:watch": "npm run test -- --watch",
     "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit --coverage"
   },
@@ -36,11 +34,11 @@
     "@ctrl/eslint-config": "2.0.9",
     "@jest/globals": "27.0.6",
     "@sindresorhus/tsconfig": "1.0.2",
-    "@types/node": "16.4.0",
+    "@types/node": "16.4.3",
     "buffer": "6.0.3",
     "jest": "27.0.6",
     "jest-junit": "12.2.0",
-    "rollup": "2.53.3",
+    "rollup": "2.54.0",
     "rollup-plugin-livereload": "2.0.5",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
@@ -52,10 +50,12 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "coverageProvider": "v8",
     "preset": "ts-jest/presets/default-esm",
     "globals": {
       "ts-jest": {
-        "useESM": true
+        "useESM": true,
+        "isolatedModules": true
       }
     }
   },
@@ -66,6 +66,6 @@
     "branch": "master"
   },
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=14.16"
   }
 }

@@ -1,11 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "declaration": false,
-    "lib": ["ES2020", "dom"],
-    "moduleResolution": "node",
-    "strict": false
-  },
-  "files": ["src/main.ts"],
-  "include": ["./**/*.ts"]
+    "declaration": false
+  }
 }
