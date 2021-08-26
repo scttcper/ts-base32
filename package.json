@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@ctrl/eslint-config": "2.0.13",
-    "@sindresorhus/tsconfig": "1.0.2",
-    "@types/node": "16.7.1",
+    "@sindresorhus/tsconfig": "2.0.0",
+    "@types/node": "16.7.2",
     "buffer": "6.0.3",
     "c8": "7.8.0",
     "expect": "27.0.6",
