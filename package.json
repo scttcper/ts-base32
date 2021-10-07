@@ -27,21 +27,21 @@
     "lint:fix": "eslint --fix --ext .ts .",
     "prepare": "npm run build",
     "build": "tsc",
-    "test": "NODE_OPTIONS=\"--loader ts-node/esm\" uvu test",
-    "test:watch": "NODE_OPTIONS=\"--loader ts-node/esm\" watchlist src test -- uvu test",
-    "test:ci": "NODE_OPTIONS=\"--loader ts-node/esm\" c8 --reporter=text --reporter=lcov uvu test"
+    "test": "uvu -r tsm test",
+    "test:watch": "watchlist src test -- uvu -r tsm test",
+    "test:ci": "c8 --reporter=text --reporter=lcov uvu -r tsm test"
   },
   "devDependencies": {
-    "@ctrl/eslint-config": "2.0.13",
+    "@ctrl/eslint-config": "2.2.0",
     "@sindresorhus/tsconfig": "2.0.0",
-    "@types/node": "16.7.2",
+    "@types/node": "16.10.3",
     "buffer": "6.0.3",
-    "c8": "7.8.0",
-    "expect": "27.0.6",
-    "ts-node": "10.2.1",
-    "typescript": "4.3.5",
+    "c8": "7.10.0",
+    "expect": "27.2.4",
+    "tsm": "2.1.0",
+    "typescript": "4.4.3",
     "uvu": "0.5.1",
-    "watchlist": "0.2.3"
+    "watchlist": "0.3.1"
   },
   "workspaces": [
     "demo"
