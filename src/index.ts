@@ -79,13 +79,11 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Array
     case 'RFC3548':
     case 'RFC4648':
       alphabet = RFC4648;
-      // eslint-disable-next-line no-useless-escape
-      cleanedInput = input.toUpperCase().replace(/\=+$/, '');
+      cleanedInput = input.toUpperCase().replace(/=+$/, '');
       break;
     case 'RFC4648-HEX':
       alphabet = RFC4648_HEX;
-      // eslint-disable-next-line no-useless-escape
-      cleanedInput = input.toUpperCase().replace(/\=+$/, '');
+      cleanedInput = input.toUpperCase().replace(/=+$/, '');
       break;
     case 'Crockford':
       alphabet = CROCKFORD;

@@ -6,6 +6,7 @@
   },
   "extends": ["@ctrl/eslint-config"],
   "rules": {
-    "no-bitwise": "off"
+    "no-bitwise": "off",
+    "@typescript-eslint/restrict-plus-operands": "off"
   }
 }
