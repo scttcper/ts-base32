@@ -1,5 +1,6 @@
 import { Buffer } from 'buffer';
 
+// @ts-expect-error
 import { base32Decode, base32Encode, hexToArrayBuffer } from '../../src/index.js';
 
 (window as any).Buffer = Buffer;

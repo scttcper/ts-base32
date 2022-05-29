@@ -14,9 +14,6 @@ jobs:
           name: test
           command: npm run test:ci
       - run:
-          name: typecheck demo
-          command: npx tsc -p demo/tsconfig.json
-      - run:
           name: lint
           command: npm run lint
       - codecov/upload
