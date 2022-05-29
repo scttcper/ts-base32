@@ -1,15 +1,8 @@
-import expect from 'expect';
-import { suite as suiteFn, test } from 'uvu';
+import { describe, expect, test } from 'vitest';
 
 import { base32Decode, base32Encode, hexToArrayBuffer } from '../src/index.js';
 
 import { CROCKFORD_EXTRAS, TEST_CASES } from './test-cases.js';
-
-function describe(name: string, fn: any) {
-  const suite = suiteFn(name);
-  fn(suite);
-  suite.run();
-}
 
 describe('encode', () => {
   TEST_CASES.forEach(([variant, input, expected]) => {
@@ -112,5 +105,3 @@ describe('hexToArrayBuffer', () => {
     expect(() => hexToArrayBuffer('123')).toThrow();
   });
 });
-
-test.run();

@@ -2,7 +2,7 @@
   "extends": "@sindresorhus/tsconfig",
   "compilerOptions": {
     "lib": ["ES2020"],
-    "outDir": "dist",
-    "esModuleInterop": true
-  }
+    "outDir": "dist"
+  },
+  "include": ["./src", "./test"]
 }

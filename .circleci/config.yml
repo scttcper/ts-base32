@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4
+  node: circleci/node@5
   codecov: codecov/codecov@3
 jobs:
   test:
@@ -13,6 +13,9 @@ jobs:
       - run:
           name: test
           command: npm run test:ci
+      - run:
+          name: typecheck demo
+          command: npx tsc -p demo/tsconfig.json
       - run:
           name: lint
           command: npm run lint
