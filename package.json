@@ -29,7 +29,7 @@
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ci": "vitest run --coverage --reporter=junit --outputFile=./junit.xml"
+    "test:ci": "vitest run --coverage --reporter=junit --outputFile=./junit/test.xml"
   },
   "devDependencies": {
     "@ctrl/eslint-config": "3.4.4",
