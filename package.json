@@ -46,7 +46,7 @@
     "access": "public"
   },
   "release": {
-    "branch": "master"
+    "branches": ["master"]
   },
   "engines": {
     "node": ">=14.16"
