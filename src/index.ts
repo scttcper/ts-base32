@@ -30,7 +30,7 @@ export function base32Encode(
       throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
 
-  const padding = options.padding === undefined ? defaultPadding : options.padding;
+  const padding = options.padding ?? defaultPadding;
   const length = buffer.byteLength;
   const view = new Uint8Array(buffer);
 
