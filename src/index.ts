@@ -5,7 +5,7 @@ const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 type Variant = 'RFC3548' | 'RFC4648' | 'RFC4648-HEX' | 'Crockford';
 
 export function base32Encode(
-  buffer: ArrayBuffer,
+  input: Uint8Array,
   variant: Variant = 'RFC4648',
   options: Partial<{ padding: boolean }> = {},
 ): string {
@@ -32,8 +32,8 @@ export function base32Encode(
   }
 
   const padding = options.padding ?? defaultPadding;
-  const length = buffer.byteLength;
-  const view = new Uint8Array(buffer);
+  const length = input.byteLength;
+  const view = new Uint8Array(input);
 
   let bits = 0;
   let value = 0;
@@ -72,7 +72,7 @@ function readChar(alphabet: string, char: string): number {
   return idx;
 }
 
-export function base32Decode(input: string, variant: Variant = 'RFC4648'): ArrayBuffer {
+export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8Array {
   let alphabet: string;
   let cleanedInput: string;
 
@@ -113,13 +113,13 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Array
     }
   }
 
-  return output.buffer;
+  return output;
 }
 
 /**
- * Turn a string of hexadecimal characters into an ArrayBuffer
+ * Turn a string of hexadecimal characters into an Uint8Array
  */
-export function hexToArrayBuffer(hex: string): ArrayBuffer {
+export function hexToUint8Array(hex: string): Uint8Array {
   if (hex.length % 2 !== 0) {
     throw new RangeError('Expected string to be an even number of characters');
   }
@@ -130,5 +130,5 @@ export function hexToArrayBuffer(hex: string): ArrayBuffer {
     view[i / 2] = parseInt(hex.substring(i, i + 2), 16);
   }
 
-  return view.buffer;
+  return view;
 }

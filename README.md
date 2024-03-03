@@ -14,17 +14,18 @@ npm install @ctrl/ts-base32
 
 ```ts
 import { base32Encode, base32Decode } from '@ctrl/ts-base32';
+import { stringToUint8Array, uint8ArrayToString } from 'uint8array-extras';
 
-console.log(base32Encode(Buffer.from('a')));
+console.log(base32Encode(stringToUint8Array('a')));
 // 'ME======'
 
-console.log(base32Encode(Buffer.from('a'), { padding: false }));
+console.log(base32Encode(stringToUint8Array('a'), { padding: false }));
 // 'ME'
 
 console.log(base32Decode('ME======'));
-// ArrayBuffer { byteLength: 1 }
+// Uint8Array
 
-console.log(Buffer.from(base32Decode('ME======')).toString());
+console.log(uint8ArrayToString(base32Decode('ME======'))
 // 'a'
 ```
 
@@ -32,4 +33,4 @@ console.log(Buffer.from(base32Decode('ME======')).toString());
 
 base32-encode - https://github.com/LinusU/base32-encode  
 base32-decode - https://github.com/LinusU/base32-decode  
-hex-to-array-buffer - https://github.com/LinusU/hex-to-array-buffer
+uint8array-extras - https://github.com/sindresorhus/uint8array-extras
