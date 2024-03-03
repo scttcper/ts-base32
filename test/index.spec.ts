@@ -1,5 +1,6 @@
 import { Buffer } from 'node:buffer';
 
+import { stringToUint8Array } from 'uint8array-extras';
 import { describe, expect, test } from 'vitest';
 
 import { base32Decode, base32Encode, hexToUint8Array } from '../src/index.js';
@@ -25,6 +26,7 @@ describe('encode', () => {
 
   test('should encode simple examples', () => {
     expect(base32Encode(Buffer.from('a'))).toBe('ME======');
+    expect(base32Encode(stringToUint8Array('a'))).toBe('ME======');
     expect(base32Encode(Buffer.from('be'))).toBe('MJSQ====');
     expect(base32Encode(Buffer.from('bee'))).toBe('MJSWK===');
     expect(base32Encode(Buffer.from('beer'))).toBe('MJSWK4Q=');
