@@ -1,20 +1,22 @@
+import { Buffer } from 'node:buffer';
+
 import { describe, expect, test } from 'vitest';
 
-import { base32Decode, base32Encode, hexToArrayBuffer } from '../src/index.js';
+import { base32Decode, base32Encode, hexToUint8Array } from '../src/index.js';
 
 import { CROCKFORD_EXTRAS, TEST_CASES } from './test-cases.js';
 
 describe('encode', () => {
   TEST_CASES.forEach(([variant, input, expected]) => {
     test(`should encode ${variant} ${input}`, () => {
-      expect(base32Encode(hexToArrayBuffer(input), variant as any)).toEqual(expected);
+      expect(base32Encode(hexToUint8Array(input), variant as any)).toEqual(expected);
     });
   });
 
   TEST_CASES.forEach(([variant, input, expected]) => {
     test(`should encode w/ padding disabled ${variant} ${input}`, () => {
       const options = { padding: false };
-      expect(base32Encode(hexToArrayBuffer(input), variant as any, options)).toEqual(
+      expect(base32Encode(hexToUint8Array(input), variant as any, options)).toEqual(
         // eslint-disable-next-line no-useless-escape
         expected.replace(/\=/g, ''),
       );
@@ -42,12 +44,12 @@ describe('encode', () => {
 describe('decode', () => {
   TEST_CASES.forEach(([variant, input, expected]) => {
     test(`should decode ${variant} ${input}`, () => {
-      expect(base32Decode(expected, variant as any)).toEqual(hexToArrayBuffer(input));
+      expect(base32Decode(expected, variant as any)).toEqual(hexToUint8Array(input));
     });
   });
   CROCKFORD_EXTRAS.forEach(([variant, input, expected]) => {
     test(`should decode crockford extra ${variant} ${input}`, () => {
-      expect(base32Decode(expected, variant as any)).toEqual(hexToArrayBuffer(input));
+      expect(base32Decode(expected, variant as any)).toEqual(hexToUint8Array(input));
     });
   });
   test('should decode simple examples', () => {
@@ -84,24 +86,24 @@ describe('decode', () => {
 
 describe('hexToArrayBuffer', () => {
   test('should convert characters to ArrayBuffer', () => {
-    expect(hexToArrayBuffer('')).toEqual(Uint8Array.from([]).buffer);
-    expect(hexToArrayBuffer('1337')).toEqual(Uint8Array.from([0x13, 0x37]).buffer);
-    expect(hexToArrayBuffer('aabb')).toEqual(Uint8Array.from([0xaa, 0xbb]).buffer);
-    expect(hexToArrayBuffer('AABB')).toEqual(Uint8Array.from([0xaa, 0xbb]).buffer);
-    expect(hexToArrayBuffer('ceae96a325e1dc5dd4f405d905049ceb')).toEqual(
+    expect(hexToUint8Array('')).toEqual(Uint8Array.from([]));
+    expect(hexToUint8Array('1337')).toEqual(Uint8Array.from([0x13, 0x37]));
+    expect(hexToUint8Array('aabb')).toEqual(Uint8Array.from([0xaa, 0xbb]));
+    expect(hexToUint8Array('AABB')).toEqual(Uint8Array.from([0xaa, 0xbb]));
+    expect(hexToUint8Array('ceae96a325e1dc5dd4f405d905049ceb')).toEqual(
       Uint8Array.from([
         0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
         0xeb,
-      ]).buffer,
+      ]),
     );
-    expect(hexToArrayBuffer('CEAE96A325E1DC5DD4F405D905049CEB')).toEqual(
+    expect(hexToUint8Array('CEAE96A325E1DC5DD4F405D905049CEB')).toEqual(
       Uint8Array.from([
         0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
         0xeb,
-      ]).buffer,
+      ]),
     );
   });
   test('should error on uneven length', () => {
-    expect(() => hexToArrayBuffer('123')).toThrow();
+    expect(() => hexToUint8Array('123')).toThrow();
   });
 });
