@@ -26,6 +26,7 @@ export function base32Encode(
       alphabet = CROCKFORD;
       defaultPadding = false;
       break;
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     default:
       throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
@@ -89,6 +90,7 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Array
       alphabet = CROCKFORD;
       cleanedInput = input.toUpperCase().replace(/O/g, '0').replace(/[IL]/g, '1');
       break;
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     default:
       throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
