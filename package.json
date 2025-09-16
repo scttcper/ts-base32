@@ -4,7 +4,10 @@
   "description": "Base32 encoder/decoder with support for multiple variants",
   "author": "Scott Cooper <scttcper@gmail.com>",
   "license": "MIT",
-  "repository": "scttcper/ts-base32",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scttcper/ts-base32.git"
+  },
   "homepage": "https://ts-base32.vercel.app",
   "keywords": [
     "base32",
