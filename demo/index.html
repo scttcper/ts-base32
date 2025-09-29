@@ -10,7 +10,7 @@
     <div class="bg-white dark:bg-gray-800 dark:text-gray-300 mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="max-w-2xl mx-auto">
         <div class="text-base max-w-prose">
-          <h1 class="leading-1 text-5xl text-gray-800 dark:text-white font-semibold">Base32</h1>
+          <h1 class="leading-10 text-5xl text-gray-800 dark:text-white font-semibold">Base32</h1>
           <p class="mt-2 text-xl text-gray-900 dark:text-gray-300">
             Base32 encoder/decoder with support for multiple variants
           </p>
@@ -47,8 +47,8 @@
 
         <div class="max-w-prose mb-6">
           <h3 class="text-xl font-semibold leading-5 mb-4">Demo</h3>
-          <section>
-            <label for="input" class="mb-3">Input string:</label>
+          <section class="grid grid-cols-1 gap-3">
+            <label for="input">Input string:</label>
             <textarea
               id="input"
               type="text"
@@ -58,7 +58,7 @@
               autocomplete="off"
               class="shadow-sm block w-full bg-white dark:bg-gray-900 focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 dark:border-gray-700 rounded-md mb-3"
             ></textarea>
-            <label for="output" class="mb-3">Output:</label>
+            <label for="output">Output:</label>
             <textarea
               id="output"
               type="text"
