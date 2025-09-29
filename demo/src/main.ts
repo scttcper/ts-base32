@@ -1,9 +1,16 @@
-// @ts-expect-error
 import { base32Decode, base32Encode, hexToUint8Array } from '../../src/index.js';
 
-(window as any).base32Decode = base32Decode;
-(window as any).base32Encode = base32Encode;
-(window as any).hexToUint8Array = hexToUint8Array;
+declare global {
+  interface Window {
+    base32Decode: typeof base32Decode;
+    base32Encode: typeof base32Encode;
+    hexToUint8Array: typeof hexToUint8Array;
+  }
+}
+
+window.base32Decode = base32Decode;
+window.base32Encode = base32Encode;
+window.hexToUint8Array = hexToUint8Array;
 
 const input = document.querySelector<HTMLInputElement>('#input')!;
 const output = document.querySelector<HTMLInputElement>('#output')!;
