@@ -26,7 +26,6 @@ export function base32Encode(
       alphabet = CROCKFORD;
       defaultPadding = false;
       break;
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     default:
       throw new Error(`Unknown base32 variant: ${variant as string}`);
   }
