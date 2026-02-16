@@ -2,27 +2,31 @@
   "name": "@ctrl/ts-base32",
   "version": "0.0.0-placeholder",
   "description": "Base32 encoder/decoder with support for multiple variants",
-  "author": "Scott Cooper <scttcper@gmail.com>",
+  "keywords": [
+    "base32",
+    "crockford",
+    "rfc3548",
+    "rfc4648",
+    "typescript"
+  ],
+  "homepage": "https://ts-base32.ep.workers.dev",
   "license": "MIT",
+  "author": "Scott Cooper <scttcper@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scttcper/ts-base32.git"
   },
-  "homepage": "https://ts-base32.ep.workers.dev",
-  "keywords": [
-    "base32",
-    "rfc3548",
-    "rfc4648",
-    "crockford",
-    "typescript"
-  ],
-  "type": "module",
-  "exports": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
   "files": [
     "dist/src"
   ],
+  "type": "module",
   "sideEffects": false,
+  "types": "./dist/src/index.d.ts",
+  "exports": "./dist/src/index.js",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "demo:build": "pnpm run -r build",
     "demo:watch": "pnpm run -r dev",
@@ -34,7 +38,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@ctrl/eslint-config-biome": "5.0.1",
+    "@ctrl/oxlint-config": "1.4.0",
     "@sindresorhus/tsconfig": "8.1.0",
     "@types/node": "25.2.3",
     "oxfmt": "0.32.0",
@@ -42,10 +46,6 @@
     "typescript": "5.9.3",
     "uint8array-extras": "1.5.0",
     "vitest": "4.0.18"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   },
   "release": {
     "branches": [

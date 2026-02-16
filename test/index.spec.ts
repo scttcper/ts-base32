@@ -18,8 +18,7 @@ describe('encode', () => {
     test(`should encode w/ padding disabled ${variant} ${input}`, () => {
       const options = { padding: false };
       expect(base32Encode(hexToUint8Array(input), variant as any, options)).toEqual(
-        // eslint-disable-next-line no-useless-escape
-        expected.replace(/\=/g, ''),
+        expected.replace(/=/g, ''),
       );
     });
   });
@@ -71,7 +70,7 @@ describe('decode', () => {
 
   test('should be binary safe', () => {
     expect(
-      Buffer.from(base32Decode(base32Encode(Buffer.from([0x00, 0xff, 0x88])))).toString('hex'),
+      Buffer.from(base32Decode(base32Encode(Buffer.from([0x00, 0xFF, 0x88])))).toString('hex'),
     ).toBe('00ff88');
     const code = 'f61e1f998d69151de8334dbe753ab17ae831c13849a6aecd95d0a4e5dc25';
     const encoded = '6YPB7GMNNEKR32BTJW7HKOVRPLUDDQJYJGTK5TMV2CSOLXBF';
@@ -90,18 +89,18 @@ describe('hexToArrayBuffer', () => {
   test('should convert characters to ArrayBuffer', () => {
     expect(hexToUint8Array('')).toEqual(Uint8Array.from([]));
     expect(hexToUint8Array('1337')).toEqual(Uint8Array.from([0x13, 0x37]));
-    expect(hexToUint8Array('aabb')).toEqual(Uint8Array.from([0xaa, 0xbb]));
-    expect(hexToUint8Array('AABB')).toEqual(Uint8Array.from([0xaa, 0xbb]));
+    expect(hexToUint8Array('aabb')).toEqual(Uint8Array.from([0xAA, 0xBB]));
+    expect(hexToUint8Array('AABB')).toEqual(Uint8Array.from([0xAA, 0xBB]));
     expect(hexToUint8Array('ceae96a325e1dc5dd4f405d905049ceb')).toEqual(
       Uint8Array.from([
-        0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
-        0xeb,
+        0xCE, 0xAE, 0x96, 0xA3, 0x25, 0xE1, 0xDC, 0x5D, 0xD4, 0xF4, 0x05, 0xD9, 0x05, 0x04, 0x9C,
+        0xEB,
       ]),
     );
     expect(hexToUint8Array('CEAE96A325E1DC5DD4F405D905049CEB')).toEqual(
       Uint8Array.from([
-        0xce, 0xae, 0x96, 0xa3, 0x25, 0xe1, 0xdc, 0x5d, 0xd4, 0xf4, 0x05, 0xd9, 0x05, 0x04, 0x9c,
-        0xeb,
+        0xCE, 0xAE, 0x96, 0xA3, 0x25, 0xE1, 0xDC, 0x5D, 0xD4, 0xF4, 0x05, 0xD9, 0x05, 0x04, 0x9C,
+        0xEB,
       ]),
     );
   });
