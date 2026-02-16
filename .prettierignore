@@ -1,3 +1,7 @@
-CHANGELOG.md
-package.json
 pnpm-lock.yaml
+public
+dist
+demo/node_modules
+demo/index.html
+# i don't know what is happening here
+test/index.spec.ts

@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 const RFC4648 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 const RFC4648_HEX = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
@@ -14,21 +15,24 @@ export function base32Encode(
 
   switch (variant) {
     case 'RFC3548':
-    case 'RFC4648':
+    case 'RFC4648': {
       alphabet = RFC4648;
       defaultPadding = true;
       break;
-    case 'RFC4648-HEX':
+    }
+    case 'RFC4648-HEX': {
       alphabet = RFC4648_HEX;
       defaultPadding = true;
       break;
-    case 'Crockford':
+    }
+    case 'Crockford': {
       alphabet = CROCKFORD;
       defaultPadding = false;
       break;
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
-    default:
+    }
+    default: {
       throw new Error(`Unknown base32 variant: ${variant as string}`);
+    }
   }
 
   const padding = options.padding ?? defaultPadding;
@@ -66,7 +70,7 @@ function readChar(alphabet: string, char: string): number {
   const idx = alphabet.indexOf(char);
 
   if (idx === -1) {
-    throw new Error('Invalid character found: ' + char);
+    throw new Error(`Invalid character found: ${char}`);
   }
 
   return idx;
@@ -78,21 +82,24 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
 
   switch (variant) {
     case 'RFC3548':
-    case 'RFC4648':
+    case 'RFC4648': {
       alphabet = RFC4648;
       cleanedInput = input.toUpperCase().replace(/=+$/, '');
       break;
-    case 'RFC4648-HEX':
+    }
+    case 'RFC4648-HEX': {
       alphabet = RFC4648_HEX;
       cleanedInput = input.toUpperCase().replace(/=+$/, '');
       break;
-    case 'Crockford':
+    }
+    case 'Crockford': {
       alphabet = CROCKFORD;
       cleanedInput = input.toUpperCase().replace(/O/g, '0').replace(/[IL]/g, '1');
       break;
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
-    default:
+    }
+    default: {
       throw new Error(`Unknown base32 variant: ${variant as string}`);
+    }
   }
 
   const { length } = cleanedInput;
@@ -101,7 +108,7 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
   let value = 0;
 
   let index = 0;
-  const output = new Uint8Array(((length * 5) / 8) | 0);
+  const output = new Uint8Array(Math.trunc((length * 5) / 8));
 
   for (let i = 0; i < length; i++) {
     value = (value << 5) | readChar(alphabet, cleanedInput[i]!);
@@ -127,7 +134,7 @@ export function hexToUint8Array(hex: string): Uint8Array {
   const view = new Uint8Array(hex.length / 2);
 
   for (let i = 0; i < hex.length; i += 2) {
-    view[i / 2] = parseInt(hex.substring(i, i + 2), 16);
+    view[i / 2] = Number.parseInt(hex.slice(i, i + 2), 16);
   }
 
   return view;
