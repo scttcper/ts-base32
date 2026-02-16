@@ -3,6 +3,10 @@ const RFC4648 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 const RFC4648_HEX = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
+// Pre-computed 2-char string table (32x32 = 1024 entries). Lets us emit 8 output
+// chars per 5-byte input chunk with 4 string concats instead of 8. This is the
+// fastest portable encode strategy — the only thing faster is Buffer.latin1Slice
+// which is Node-specific.
 function createEncodePairs(alphabet: string): string[] {
   const pairs: string[] = [];
   for (let i = 0; i < 32; i++) {
@@ -10,14 +14,18 @@ function createEncodePairs(alphabet: string): string[] {
       pairs.push(alphabet[i]! + alphabet[j]!);
     }
   }
+
   return pairs;
 }
 
+// Single-char lookup for the trailing partial block (0-4 bytes) that doesn't
+// fill a complete 5-byte chunk.
 function createEncodeLookup(alphabet: string): Uint8Array {
   const table = new Uint8Array(32);
   for (let i = 0; i < 32; i++) {
     table[i] = alphabet.charCodeAt(i);
   }
+
   return table;
 }
 
@@ -35,18 +43,21 @@ function getEncodePairs(variant: Variant): string[] {
       if (rfc4648EncodePairs === undefined) {
         rfc4648EncodePairs = createEncodePairs(RFC4648);
       }
+
       return rfc4648EncodePairs;
     }
     case 'RFC4648-HEX': {
       if (rfc4648HexEncodePairs === undefined) {
         rfc4648HexEncodePairs = createEncodePairs(RFC4648_HEX);
       }
+
       return rfc4648HexEncodePairs;
     }
     case 'Crockford': {
       if (crockfordEncodePairs === undefined) {
         crockfordEncodePairs = createEncodePairs(CROCKFORD);
       }
+
       return crockfordEncodePairs;
     }
     default: {
@@ -62,18 +73,21 @@ function getEncodeLookup(variant: Variant): Uint8Array {
       if (rfc4648EncodeLookup === undefined) {
         rfc4648EncodeLookup = createEncodeLookup(RFC4648);
       }
+
       return rfc4648EncodeLookup;
     }
     case 'RFC4648-HEX': {
       if (rfc4648HexEncodeLookup === undefined) {
         rfc4648HexEncodeLookup = createEncodeLookup(RFC4648_HEX);
       }
+
       return rfc4648HexEncodeLookup;
     }
     case 'Crockford': {
       if (crockfordEncodeLookup === undefined) {
         crockfordEncodeLookup = createEncodeLookup(CROCKFORD);
       }
+
       return crockfordEncodeLookup;
     }
     default: {
@@ -82,6 +96,9 @@ function getEncodeLookup(variant: Variant): Uint8Array {
   }
 }
 
+// Decode lookup: charCode → 5-bit value. Int8Array so -1 sentinel propagates
+// through bitwise OR, letting us batch-validate 4 lookups with a single sign check.
+// Includes lowercase mappings (a-z → same as A-Z) to avoid toUpperCase() calls.
 function createDecodeLookup(alphabet: string, crockfordAliases: boolean): Int8Array {
   const table = new Int8Array(128);
   table.fill(-1);
@@ -95,13 +112,15 @@ function createDecodeLookup(alphabet: string, crockfordAliases: boolean): Int8Ar
     }
   }
 
+  // Crockford treats O as 0 and I/L as 1 — bake these aliases into the table
+  // so we never need replace() calls on the input string.
   if (crockfordAliases) {
-    table[79] = 0;
-    table[111] = 0;
-    table[73] = 1;
-    table[105] = 1;
-    table[76] = 1;
-    table[108] = 1;
+    table[79] = 0; // O
+    table[111] = 0; // o
+    table[73] = 1; // I
+    table[105] = 1; // i
+    table[76] = 1; // L
+    table[108] = 1; // l
   }
 
   return table;
@@ -118,18 +137,21 @@ function getDecodeLookup(variant: Variant): Int8Array {
       if (rfc4648Lookup === undefined) {
         rfc4648Lookup = createDecodeLookup(RFC4648, false);
       }
+
       return rfc4648Lookup;
     }
     case 'RFC4648-HEX': {
       if (rfc4648HexLookup === undefined) {
         rfc4648HexLookup = createDecodeLookup(RFC4648_HEX, false);
       }
+
       return rfc4648HexLookup;
     }
     case 'Crockford': {
       if (crockfordLookup === undefined) {
         crockfordLookup = createDecodeLookup(CROCKFORD, true);
       }
+
       return crockfordLookup;
     }
     default: {
@@ -140,6 +162,7 @@ function getDecodeLookup(variant: Variant): Int8Array {
 
 type Variant = 'RFC3548' | 'RFC4648' | 'RFC4648-HEX' | 'Crockford';
 
+// Indexed by trailing byte count (0-4) after full 5-byte chunks.
 const PADDING_CHARS = ['', '======', '====', '===', '='];
 
 export function base32Encode(
@@ -159,6 +182,8 @@ export function base32Encode(
   let o = '';
   let i = 0;
 
+  // Fast path: process 5 input bytes → 8 output chars using the pair table.
+  // Each 5-byte chunk yields four 10-bit indices into the 1024-entry pairs array.
   for (; i < fullChunksBytes; i += 5) {
     const a = input[i]!;
     const b = input[i + 1]!;
@@ -175,6 +200,7 @@ export function base32Encode(
     o += pairs[x3]!;
   }
 
+  // Slow path: remaining 1-4 bytes, emit one char at a time.
   const remaining = length - fullChunksBytes;
   if (remaining > 0) {
     let bits = 0;
@@ -212,8 +238,8 @@ function readChar(table: Int8Array, charCode: number): number {
 export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8Array {
   const m = getDecodeLookup(variant);
 
+  // Strip trailing '=' padding with a charCodeAt loop instead of replace().
   let end = input.length;
-
   if (variant !== 'Crockford') {
     while (end > 0 && input.charCodeAt(end - 1) === 61) {
       end--;
@@ -225,6 +251,10 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
   const output = new Uint8Array(Math.trunc((end * 5) / 8));
   let at = 0;
 
+  // Fast path: process 8 input chars → 5 output bytes. Packs two groups of 4
+  // lookups into 20-bit integers, then extracts 5 bytes. The Int8Array table
+  // makes any -1 (invalid char) propagate through the OR chain, so a single
+  // sign check covers all 4 lookups.
   for (let i = 0; i < mainLength; i += 8) {
     const x0 = input.charCodeAt(i);
     const x1 = input.charCodeAt(i + 1);
@@ -247,6 +277,7 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
     at += 5;
   }
 
+  // Slow path: remaining 0-7 chars.
   let bits = 0;
   let value = 0;
   for (let i = mainLength; i < end; i++) {

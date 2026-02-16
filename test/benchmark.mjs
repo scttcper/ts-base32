@@ -6,7 +6,6 @@ import { base32Decode, base32Encode } from '../dist/src/index.js';
 import { base32, base32hex, base32crockford } from '@scure/base';
 import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
 
-
 const KB = 1024;
 const warmup = 100;
 const time = 500;
@@ -76,8 +75,7 @@ bench
   })
   .add('@exodus/bytes decode hex 64KB', () => {
     fromBase32hex(encodedRfc4648HexNoPad);
-  })
-;
+  });
 
 await bench.run();
 
