@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/scttcper/ts-base32.git"
   },
-  "homepage": "https://ts-base32.vercel.app",
+  "homepage": "https://ts-base32.ep.workers.dev",
   "keywords": [
     "base32",
     "rfc3548",
