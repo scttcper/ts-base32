@@ -29,6 +29,19 @@ console.log(uint8ArrayToString(base32Decode('ME======'))
 // 'a'
 ```
 
+### Benchmarks
+
+64KB payload, Node.js, ops/s (higher is better):
+
+| Benchmark | @ctrl/ts-base32 | @exodus/bytes | @scure/base |
+|---|---|---|---|
+| encode RFC4648 | 8,500 | 31,300 | 280 |
+| encode Crockford | 8,500 | — | 327 |
+| decode RFC4648 | 6,400 | 9,900 | 330 |
+| decode Crockford | 6,500 | — | 378 |
+
+Run `pnpm bench` to reproduce.
+
 ### See Also
 
 base32-encode - https://github.com/LinusU/base32-encode  
