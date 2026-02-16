@@ -29,6 +29,20 @@ console.log(uint8ArrayToString(base32Decode('ME======'))
 // 'a'
 ```
 
+### Benchmarks
+
+64KB payload, Node.js, ops/s (higher is better):
+[@exodus/bytes](https://github.com/ExodusOSS/bytes) uses nodejs `Buffer`, but is very fast.
+
+| Benchmark | @ctrl/ts-base32 | @exodus/bytes | base32-encode/decode | @scure/base |
+|---|---|---|---|---|
+| encode RFC4648 | 8,500 | 31,200 | 2,600 | 283 |
+| encode Crockford | 8,500 | — | — | 332 |
+| decode RFC4648 | 6,500 | 9,900 | 755 | 333 |
+| decode Crockford | 6,700 | — | — | 387 |
+
+Run `pnpm bench` to reproduce.
+
 ### See Also
 
 base32-encode - https://github.com/LinusU/base32-encode  

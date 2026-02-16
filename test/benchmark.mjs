@@ -1,10 +1,13 @@
 import { randomBytes } from 'node:crypto';
 
+import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
+import { base32, base32hex, base32crockford } from '@scure/base';
 import { Bench } from 'tinybench';
 
+import linusEncode from 'base32-encode';
+import linusDecode from 'base32-decode';
+
 import { base32Decode, base32Encode } from '../dist/src/index.js';
-import { base32, base32hex, base32crockford } from '@scure/base';
-import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
 
 const KB = 1024;
 const warmup = 100;
@@ -75,6 +78,12 @@ bench
   })
   .add('@exodus/bytes decode hex 64KB', () => {
     fromBase32hex(encodedRfc4648HexNoPad);
+  })
+  .add('base32-encode (LinusU) 64KB', () => {
+    linusEncode(random64k, 'RFC4648');
+  })
+  .add('base32-decode (LinusU) 64KB', () => {
+    linusDecode(encodedRfc4648, 'RFC4648');
   });
 
 await bench.run();

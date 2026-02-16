@@ -267,7 +267,9 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
     const a = (m[x0]! << 15) | (m[x1]! << 10) | (m[x2]! << 5) | m[x3]!;
     const b = (m[x4]! << 15) | (m[x5]! << 10) | (m[x6]! << 5) | m[x7]!;
     if (a < 0 || b < 0) {
-      for (let j = i; j < i + 8; j++) readChar(m, input.charCodeAt(j));
+      for (let j = i; j < i + 8; j++) {
+        readChar(m, input.charCodeAt(j));
+      }
     }
     output[at] = a >> 12;
     output[at + 1] = (a >> 4) & 0xff;
