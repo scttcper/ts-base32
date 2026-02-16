@@ -40,6 +40,8 @@
   },
   "devDependencies": {
     "@ctrl/oxlint-config": "1.4.0",
+    "@exodus/bytes": "^1.14.1",
+    "@scure/base": "^2.0.0",
     "@sindresorhus/tsconfig": "8.1.0",
     "@types/node": "25.2.3",
     "oxfmt": "0.32.0",

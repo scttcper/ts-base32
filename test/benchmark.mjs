@@ -3,6 +3,9 @@ import { randomBytes } from 'node:crypto';
 import { Bench } from 'tinybench';
 
 import { base32Decode, base32Encode } from '../dist/src/index.js';
+import { base32, base32hex, base32crockford } from '@scure/base';
+import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
+
 
 const KB = 1024;
 const warmup = 100;
@@ -14,6 +17,8 @@ const random64k = randomBytes(64 * KB);
 const encodedRfc4648 = base32Encode(random64k, 'RFC4648', { padding: true });
 const encodedRfc4648Hex = base32Encode(random64k, 'RFC4648-HEX', { padding: true });
 const encodedCrockford = base32Encode(random64k, 'Crockford', { padding: false });
+const encodedRfc4648NoPad = base32Encode(random64k, 'RFC4648', { padding: false });
+const encodedRfc4648HexNoPad = base32Encode(random64k, 'RFC4648-HEX', { padding: false });
 
 const bench = new Bench({
   warmup,
@@ -41,7 +46,38 @@ bench
   })
   .add('decode Crockford 64KB', () => {
     base32Decode(encodedCrockford, 'Crockford');
-  });
+  })
+  .add('@scure/base encode 64KB', () => {
+    base32.encode(random64k);
+  })
+  .add('@scure/base encode hex 64KB', () => {
+    base32hex.encode(random64k);
+  })
+  .add('@scure/base encode crockford 64KB', () => {
+    base32crockford.encode(random64k);
+  })
+  .add('@scure/base decode 64KB', () => {
+    base32.decode(encodedRfc4648);
+  })
+  .add('@scure/base decode hex 64KB', () => {
+    base32hex.decode(encodedRfc4648Hex);
+  })
+  .add('@scure/base decode crockford 64KB', () => {
+    base32crockford.decode(encodedCrockford);
+  })
+  .add('@exodus/bytes encode 64KB', () => {
+    toBase32(random64k);
+  })
+  .add('@exodus/bytes encode hex 64KB', () => {
+    toBase32hex(random64k);
+  })
+  .add('@exodus/bytes decode 64KB', () => {
+    fromBase32(encodedRfc4648NoPad);
+  })
+  .add('@exodus/bytes decode hex 64KB', () => {
+    fromBase32hex(encodedRfc4648HexNoPad);
+  })
+;
 
 await bench.run();
 
