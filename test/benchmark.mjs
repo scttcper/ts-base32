@@ -2,10 +2,9 @@ import { randomBytes } from 'node:crypto';
 
 import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
 import { base32, base32hex, base32crockford } from '@scure/base';
-import { Bench } from 'tinybench';
-
-import linusEncode from 'base32-encode';
 import linusDecode from 'base32-decode';
+import linusEncode from 'base32-encode';
+import { Bench } from 'tinybench';
 
 import { base32Decode, base32Encode } from '../dist/src/index.js';
 
