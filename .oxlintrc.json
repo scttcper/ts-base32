@@ -3,6 +3,9 @@
   "env": {
     "node": true
   },
+  "rules": {
+    "unicorn/number-literal-case": "off"
+  },
   "plugins": ["react", "unicorn", "typescript", "oxc", "import"],
   "extends": ["./node_modules/@ctrl/oxlint-config/.oxlintrc.json"]
 }
