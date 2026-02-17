@@ -1,4 +1,5 @@
 import { test } from 'node:test';
+
 import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
 import { base32, base32hex, base32crockford } from '@scure/base';
 import linusDecode from 'base32-decode';

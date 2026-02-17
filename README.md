@@ -32,7 +32,7 @@ console.log(uint8ArrayToString(base32Decode('ME======'))
 ### Benchmarks
 
 64KB payload, Node.js, ops/s (higher is better):  
-Not the fastest, but supports crockford and does not use Buffer.
+Not the fastest, but supports crockford? Consider using @exodus/bytes if you only need RFC4648 and want the best performance.
 
 | Benchmark        | @ctrl/ts-base32 | @exodus/bytes | base32-encode/decode | @scure/base |
 | ---------------- | --------------- | ------------- | -------------------- | ----------- |
