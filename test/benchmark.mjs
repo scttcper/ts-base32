@@ -1,5 +1,4 @@
-import { randomBytes } from 'node:crypto';
-
+import { test } from 'node:test';
 import { toBase32, fromBase32, toBase32hex, fromBase32hex } from '@exodus/bytes/base32.js';
 import { base32, base32hex, base32crockford } from '@scure/base';
 import linusDecode from 'base32-decode';
@@ -12,8 +11,8 @@ const KB = 1024;
 const warmup = 100;
 const time = 500;
 
-const random4k = randomBytes(4 * KB);
-const random64k = randomBytes(64 * KB);
+const random4k = crypto.getRandomValues(new Uint8Array(4 * KB));
+const random64k = crypto.getRandomValues(new Uint8Array(64 * KB));
 
 const encodedRfc4648 = base32Encode(random64k, 'RFC4648', { padding: true });
 const encodedRfc4648Hex = base32Encode(random64k, 'RFC4648-HEX', { padding: true });
@@ -85,7 +84,9 @@ bench
     linusDecode(encodedRfc4648, 'RFC4648');
   });
 
-await bench.run();
+test('benchmark', async () => {
+  await bench.run();
 
-console.log('base32 tinybench results');
-console.table(bench.table());
+  console.log('base32 tinybench results');
+  console.table(bench.table());
+});
