@@ -83,6 +83,13 @@ describe('decode', () => {
   test('should error from invalid encoding characters', () => {
     expect(() => base32Decode('M😴')).toThrow('Invalid character found: ');
   });
+  test('should error on non-ASCII characters inside a full 8-character block', () => {
+    expect(() => base32Decode('MZXW6YTé')).toThrow('Invalid character found: é');
+    expect(() => base32Decode('MZXW6Y😴')).toThrow('Invalid character found: ');
+    expect(() => base32Decode('ĀZXW6YTB')).toThrow('Invalid character found: Ā');
+    expect(() => base32Decode('MZXW6YTB', 'Crockford')).not.toThrow();
+    expect(() => base32Decode('MZXW6YTÓ', 'Crockford')).toThrow('Invalid character found: Ó');
+  });
 });
 
 describe('hexToArrayBuffer', () => {
