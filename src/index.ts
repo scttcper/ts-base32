@@ -266,7 +266,9 @@ export function base32Decode(input: string, variant: Variant = 'RFC4648'): Uint8
     const x7 = input.charCodeAt(i + 7);
     const a = (m[x0]! << 15) | (m[x1]! << 10) | (m[x2]! << 5) | m[x3]!;
     const b = (m[x4]! << 15) | (m[x5]! << 10) | (m[x6]! << 5) | m[x7]!;
-    if (a < 0 || b < 0) {
+    // Char codes >= 128 index past the table and read `undefined`, which
+    // becomes 0 in the bitwise OR, so check them separately.
+    if (a < 0 || b < 0 || (x0 | x1 | x2 | x3 | x4 | x5 | x6 | x7) > 127) {
       for (let j = i; j < i + 8; j++) {
         readChar(m, input.charCodeAt(j));
       }
